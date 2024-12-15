@@ -9,7 +9,12 @@ app = Robyn(__file__)
 
 # get url中带参数
 # example: http://127.0.0.1:8081/get/111111/hahahah
-@app.get("/get/:userId/:userName")
+@app.get(
+        "/get/:userId/:userName",
+        const = True,
+        auth_required = False, 
+        openapi_name = "url中带参数",
+        openapi_tags = ["get"])
 async def path_params(request):
     userId = request.path_params.get("userId")
     userName = request.path_params.get("userName")
@@ -39,7 +44,6 @@ async def query_get(request):
 async def query_get(request):
     query_data = request.body
     return query_data
-
 
 @app.get("/get/user")
 async def getUser(request):
